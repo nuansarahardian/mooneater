@@ -1,0 +1,61 @@
+<?php
+		//echo $p['status'] 
+													$order = $fetch_orders['user_id'];
+													$cekkonfirmasipembayaran = mysqli_query($conn,"select * from konfirmasi where user_id=?");
+													$cekroww = mysqli_num_rows($cekkonfirmasipembayaran);
+													
+													if($cekroww > 0){
+														echo 'Confirmed';
+													} else {
+														if($fetch_orders['status']!='Pengiriman'){
+															echo "Menunggu Konfirmasi";
+														} else {
+															echo "Pengiriman";
+														};
+													}
+													
+													?></td>
+												</tr>		
+				
+
+                                                <p> payment status :    <?php
+								if($fetch_orders['payment_status']=='payment'){
+								echo '
+								<a href="konfirmasi.php?id='.$fetch_orders['orderid'].'" class="form-control btn-primary">
+								Konfirmasi Pembayaran
+								</a>
+								';}
+								else if($fetch_orders['payment_status']=='Diproses'){
+								echo 'Pesanan Diproses (Pembayaran Diterima)';
+								}
+								else if($fetch_orders['payment_status']=='Dikirim'){
+									echo 'Pesanan Dikirim';
+								} else if($fetch_orders['payment_status']=='Selesai'){
+									echo 'Pesanan Selesai';
+								} else if($fetch_orders['payment_status']=='Dibatalkan'){
+									echo 'Pesanan Dibatalkan';
+								} else {
+									echo 'Konfirmasi diterima';
+								}
+								
+								?>
+							</form>
+							</div>
+							<script>$(document).ready(function(c) {
+								$('.close1').on('click', function(c){
+									$('.rem1').fadeOut('slow', function(c){
+										$('.rem1').remove();
+									});
+									});	  
+								});
+						   </script></p>
+      <input type="submit" value="Konfirmasi Pembayaran" name="submit" class="btn">
+   </div>
+    </form>
+   <?php
+      }
+      }else{
+         echo '<p class="empty">no orders placed yet!</p>';
+      }
+      }
+   ?>
